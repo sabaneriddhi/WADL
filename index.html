@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Admin Dashboard</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
+
+    #container {
+      display: flex;
+      height: 100vh;
+    }
+
+    #sidebar {
+      width: 250px;
+      background-color: #4b81b7;
+      color: #ffffff;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #sidebar li {
+      margin-bottom: 10px;
+    }
+
+    #sidebar a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 1rem;
+    }
+
+    #content {
+      flex-grow: 1;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+      color: #343a40;
+    }
+
+    @media (max-width: 768px) {
+      #container {
+        flex-direction: column;
+      }
+
+      #sidebar {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    card-header {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+
+    .chart-container {
+      height: 300px;
+    }
+
+    .table-container {
+      margin-top: 20px;
+    }
+
+    .modal-dialog {
+      max-width: 400px;
+    }
+
+    .modal-content {
+      padding: 20px;
+    }
+    a{
+        text-decoration: none;
+    }
+    
+
+  </style>
+</head>
+<div id="container">
+    <div id="sidebar">
+      <h2>Dashboard</h2>
+      <ul>
+        <li><a href="#" target="_blank">Ecommerce</a></li>
+        <li><a href="https://pict.edu/" target="_blank">College</a></li>
+        <li><a href="#" target="_blank" >Exam Admin</a></li>
+      </ul>
+    </div>
+
+    <div id="content">
+      <h1>College Admin Dashboard</h1>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Statistics</h3>
+        </div>
+        <div class="card-body">
+          <!-- Add your ecommerce statistics here -->
+          <p>Some sample statistics go here.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <a href="https://pict.edu/" target="_blank"><h3>College Dashboard</h3></a> 
+        </div>
+        <div class="card-body">
+          <!-- Add your college dashboard content here -->
+          <p>Some sample content for the college dashboard.</p>
+        
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Exam Admin</h3>
+        </div>
+        <div class="card-body">
+          <!-- Add your exam admin content here -->
+          <p>Some sample content for the exam admin.</p>
+        </div>
+      </div>
+
+      <!-- Additional Functionality: Chart -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Student Performance Chart</h3>
+        </div>
+        <div class="card-body">
+          <canvas id="performanceChart" class="chart-container"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+     function submitForm() {
+      var username = document.getElementById('username').value;
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+
+      var userData = {
+        username: username,
+        email: email,
+        password: password
+      };
+
+      // Use AJAX to send data to server
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'server.php', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          // Redirect to a new page with data list
+          window.location.href = 'datalist.html';
+        }
+      };
+      xhr.send(JSON.stringify(userData));
+    }
+    // Additional Functionality: Chart
+    var ctx = document.getElementById('performanceChart').getContext('2d');
+    var performanceChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Subject 1', 'Subject 2', 'Subject 3', 'Subject 4', 'Subject 5'],
+        datasets: [{
+          label: 'Average Performance',
+          data: [75, 85, 90, 78, 88],
+          backgroundColor: '#007bff',
+          borderColor: '#007bff',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
